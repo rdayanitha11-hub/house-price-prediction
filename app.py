@@ -149,10 +149,6 @@ def history_page():
 def about_page():
     return render_template("about.html")
 
-@app.route("/reset")
-def reset():
-    session.clear()
-    return redirect(url_for("predict_page"))
 
 @app.route("/reset")
 def reset():
