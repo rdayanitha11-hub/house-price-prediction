@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect, url_for
 import pandas as pd
 import pickle
 import matplotlib.pyplot as plt
@@ -122,7 +122,11 @@ def predict():
 @app.route("/predict")
 def predict_page():
     history = session.get("history", [])
-    return render_template("predict.html", history=history)
+    return render_template(
+        "predict.html",
+        r2_score=round(r2 * 100, 2),
+        history=history
+    )
 
 
 @app.route("/analysis")
@@ -144,6 +148,21 @@ def history_page():
 @app.route("/about")
 def about_page():
     return render_template("about.html")
+
+@app.route("/reset")
+def reset():
+    session.clear()
+    return redirect(url_for("predict_page"))
+
+@app.route("/reset")
+def reset():
+    session.pop("prediction", None)
+    session.pop("area", None)
+    session.pop("bedrooms", None)
+    session.pop("bathrooms", None)
+    session.pop("r2_score", None)
+
+    return redirect(url_for("predict_page"))
 
 if __name__ == "__main__":
     app.run(debug=True)
