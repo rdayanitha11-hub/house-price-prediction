@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}History | HomePrice AI{% endblock %}
+
+{% block content %}
+
+<section class="page">
+
+    <div class="page-header">
+
+        <span class="badge">📋 PREDICTION HISTORY</span>
+
+        <h1 class="section-title">
+            Your Recent <span class="highlight">Predictions</span>
+        </h1>
+
+        <p class="section-text">
+            Review the property predictions made during this session.
+        </p>
+
+    </div>
+
+
+    <div class="card history-card">
+
+        {% if history %}
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Area</th>
+                        <th>Bedrooms</th>
+                        <th>Bathrooms</th>
+                        <th>Predicted Price</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                {% for item in history %}
+
+                    <tr>
+                        <td>{{ item.area }} sq.ft</td>
+                        <td>{{ item.bedrooms }}</td>
+                        <td>{{ item.bathrooms }}</td>
+                        <td class="price-cell">
+                            ₹ {{ item.prediction }}
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-history">
+
+            <div>📭</div>
+
+            <h2>No predictions yet</h2>
+
+            <p>
+                Make your first house price prediction
+                to see it here.
+            </p>
+
+            <a href="{{ url_for('predict_page') }}"
+               class="btn btn-primary">
+                🔮 Make Prediction
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

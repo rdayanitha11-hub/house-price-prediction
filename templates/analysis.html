@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Analysis | HomePrice AI{% endblock %}
+
+{% block content %}
+
+<section class="page">
+
+    <div class="page-header">
+        <span class="badge">📊 DATA ANALYSIS</span>
+
+        <h1 class="section-title">
+            Explore the <span class="highlight">Housing Data</span>
+        </h1>
+
+        <p class="section-text">
+            Visual insights from the dataset used to train our
+            Machine Learning model.
+        </p>
+    </div>
+
+
+    <div class="analysis-grid">
+
+        <div class="card analysis-card">
+
+            <span class="chart-number">01</span>
+
+            <h2>Area vs House Price</h2>
+
+            <p>
+                This visualization shows how house prices change
+                as the property area increases.
+            </p>
+
+            <img src="{{ url_for('static', filename='price_analysis.png') }}"
+                 alt="Area vs Price">
+
+        </div>
+
+
+        <div class="card analysis-card">
+
+            <span class="chart-number">02</span>
+
+            <h2>Prediction Visualization</h2>
+
+            <p>
+                The prediction chart compares existing houses
+                with the house predicted by the model.
+            </p>
+
+            <img src="{{ url_for('static', filename='prediction_chart.png') }}"
+                 alt="Prediction Chart">
+
+        </div>
+
+    </div>
+
+
+    <div class="card insight-card">
+
+        <span class="badge">💡 KEY INSIGHT</span>
+
+        <h2>What can we learn?</h2>
+
+        <p>
+            Larger properties generally tend to have higher
+            prices, although other factors such as bedrooms,
+            bathrooms, location preference, furnishing and
+            facilities also influence the final price.
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}

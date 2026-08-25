@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}Home | HomePrice AI{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="badge">🤖 AI POWERED • MACHINE LEARNING</span>
+
+        <h1>
+            Predict Your Home's
+            <span>Market Value</span>
+        </h1>
+
+        <p>
+            Get an estimated house price using Machine Learning
+            based on property features and historical housing data.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="{{ url_for('predict_page') }}"
+               class="btn btn-primary">
+                🔮 Predict House Price
+            </a>
+
+            <a href="{{ url_for('analysis_page') }}"
+               class="btn btn-secondary">
+                📊 Explore Data
+            </a>
+        </div>
+
+        <div class="hero-stats">
+
+            <div>
+                <strong>545+</strong>
+                <span>Properties</span>
+            </div>
+
+            <div>
+                <strong>65%</strong>
+                <span>R² Score</span>
+            </div>
+
+            <div>
+                <strong>12</strong>
+                <span>Features</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-card">
+
+        <div class="house-icon">🏡</div>
+
+        <h3>Smart Property Estimation</h3>
+
+        <p>
+            Enter your property details and let our
+            trained ML model estimate its price.
+        </p>
+
+        <div class="mini-card">
+            <span>🤖 Model</span>
+            <strong>Linear Regression</strong>
+        </div>
+
+        <div class="mini-card">
+            <span>📊 Dataset</span>
+            <strong>Housing.csv</strong>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="features page">
+
+    <div class="section-heading">
+        <span class="badge">WHY USE IT?</span>
+
+        <h2 class="section-title">
+            Everything you need to explore
+            house prices.
+        </h2>
+
+        <p class="section-text">
+            A complete Machine Learning application combining
+            prediction, data analysis and interactive visualization.
+        </p>
+    </div>
+
+
+    <div class="feature-grid">
+
+        <div class="card feature-card">
+            <div class="feature-icon">🔮</div>
+            <h3>Price Prediction</h3>
+            <p>
+                Predict the estimated price of a property
+                using multiple house features.
+            </p>
+        </div>
+
+
+        <div class="card feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Data Analysis</h3>
+            <p>
+                Explore relationships between property
+                characteristics and house prices.
+            </p>
+        </div>
+
+
+        <div class="card feature-card">
+            <div class="feature-icon">🤖</div>
+            <h3>ML Model</h3>
+            <p>
+                Powered by a Linear Regression model
+                trained on housing data.
+            </p>
+        </div>
+
+
+        <div class="card feature-card">
+            <div class="feature-icon">📋</div>
+            <h3>Prediction History</h3>
+            <p>
+                Keep track of your recent property
+                price predictions.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Model | HomePrice AI{% endblock %}
+
+{% block content %}
+
+<section class="page">
+
+    <div class="page-header">
+
+        <span class="badge">🤖 MACHINE LEARNING MODEL</span>
+
+        <h1 class="section-title">
+            Behind the <span class="highlight">Prediction</span>
+        </h1>
+
+        <p class="section-text">
+            Understand how our Machine Learning model converts
+            property information into a price prediction.
+        </p>
+
+    </div>
+
+
+    <div class="model-stats">
+
+        <div class="card model-stat">
+            <span>Algorithm</span>
+            <strong>Linear Regression</strong>
+        </div>
+
+        <div class="card model-stat">
+            <span>R² Score</span>
+            <strong>{{ r2_score }}%</strong>
+        </div>
+
+        <div class="card model-stat">
+            <span>Dataset</span>
+            <strong>Housing.csv</strong>
+        </div>
+
+        <div class="card model-stat">
+            <span>Features</span>
+            <strong>12+</strong>
+        </div>
+
+    </div>
+
+
+    <div class="model-flow">
+
+        <div class="card flow-card">
+            <span>01</span>
+            <h3>📂 Dataset</h3>
+            <p>
+                Housing data containing property features
+                and their corresponding prices.
+            </p>
+        </div>
+
+        <div class="flow-arrow">→</div>
+
+        <div class="card flow-card">
+            <span>02</span>
+            <h3>⚙️ Preprocessing</h3>
+            <p>
+                Categorical values are converted into numerical
+                features using one-hot encoding.
+            </p>
+        </div>
+
+        <div class="flow-arrow">→</div>
+
+        <div class="card flow-card">
+            <span>03</span>
+            <h3>🧠 Training</h3>
+            <p>
+                Linear Regression learns relationships between
+                property features and price.
+            </p>
+        </div>
+
+        <div class="flow-arrow">→</div>
+
+        <div class="card flow-card">
+            <span>04</span>
+            <h3>💰 Prediction</h3>
+            <p>
+                The trained model estimates the price of
+                a new property.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="card model-explanation">
+
+        <span class="badge">📖 SIMPLE EXPLANATION</span>
+
+        <h2>What is Linear Regression?</h2>
+
+        <p>
+            Linear Regression is a supervised Machine Learning
+            algorithm used to predict a numerical value.
+            In this project, it learns how different property
+            features influence house prices.
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}

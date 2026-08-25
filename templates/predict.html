@@ -1,0 +1,305 @@
+{% extends "base.html" %}
+
+{% block title %}Predict | HomePrice AI{% endblock %}
+
+{% block content %}
+
+<section class="page predict-page">
+
+    <div class="page-header">
+        <span class="badge">🔮 AI PRICE PREDICTION</span>
+
+        <h1 class="section-title">
+            What could your home<br>
+            <span class="highlight">be worth?</span>
+        </h1>
+
+        <p class="section-text">
+            Enter the details of your property and our
+            Machine Learning model will estimate its price.
+        </p>
+    </div>
+
+
+    <div class="prediction-layout">
+
+        <!-- FORM -->
+
+        <div class="card prediction-form-card">
+
+            <h2>🏠 Property Details</h2>
+
+            <p class="form-description">
+                Tell us about the property.
+            </p>
+
+            <form action="{{ url_for('predict') }}" method="POST">
+
+                <div class="form-grid">
+
+                    <div class="input-group">
+                        <label>Area (sq.ft)</label>
+                        <input type="number"
+                               name="area"
+                               placeholder="e.g. 5000"
+                               min="100"
+                               required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Bedrooms</label>
+                        <input type="number"
+                               name="bedrooms"
+                               placeholder="e.g. 3"
+                               min="1"
+                               required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Bathrooms</label>
+                        <input type="number"
+                               name="bathrooms"
+                               placeholder="e.g. 2"
+                               min="1"
+                               required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Stories</label>
+                        <input type="number"
+                               name="stories"
+                               placeholder="e.g. 2"
+                               min="1"
+                               required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Parking</label>
+                        <input type="number"
+                               name="parking"
+                               placeholder="e.g. 2"
+                               min="0"
+                               required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Main Road</label>
+                        <select name="mainroad" required>
+                            <option value="">Select</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Guest Room</label>
+                        <select name="guestroom" required>
+                            <option value="">Select</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Basement</label>
+                        <select name="basement" required>
+                            <option value="">Select</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Hot Water Heating</label>
+                        <select name="hotwaterheating" required>
+                            <option value="">Select</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Air Conditioning</label>
+                        <select name="airconditioning" required>
+                            <option value="">Select</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Preferred Area</label>
+                        <select name="prefarea" required>
+                            <option value="">Select</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Furnishing Status</label>
+                        <select name="furnishingstatus" required>
+                            <option value="">Select</option>
+                            <option value="furnished">Furnished</option>
+                            <option value="semi-furnished">Semi-Furnished</option>
+                            <option value="unfurnished">Unfurnished</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="form-buttons">
+
+                    <button type="submit" class="btn btn-primary predict-btn">
+                        🔮 Predict House Price
+                    </button>
+
+                    <button type="button"
+                         class="btn btn-secondary"
+        onclick="resetPrediction()">
+                        ↻ Reset
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- INFO CARD -->
+
+        <div class="prediction-info">
+
+            <div class="card info-card">
+
+                <div class="info-icon">🤖</div>
+
+                <h3>How it works</h3>
+
+                <p>
+                    Your property details are processed by our
+                    trained Linear Regression model.
+                </p>
+
+                <div class="step">
+                    <span>01</span>
+                    <div>
+                        <strong>Enter Details</strong>
+                        <small>Provide your property information.</small>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span>02</span>
+                    <div>
+                        <strong>AI Analysis</strong>
+                        <small>The model analyzes your inputs.</small>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span>03</span>
+                    <div>
+                        <strong>Get Estimate</strong>
+                        <small>Receive the predicted house price.</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    {% if prediction %}
+
+    <div id="prediction-result"
+     class="prediction-result card result-pop">
+
+        <span class="result-label">
+            ✨ ESTIMATED PROPERTY VALUE
+        </span>
+
+        <div class="predicted-price">
+            ₹ {{ prediction }}
+        </div>
+
+        <p>
+            Based on the property details you provided.
+        </p>
+
+        <div class="result-stats">
+
+            <div>
+                <strong>{{ area }}</strong>
+                <span>sq.ft</span>
+            </div>
+
+            <div>
+                <strong>{{ bedrooms }}</strong>
+                <span>Bedrooms</span>
+            </div>
+
+            <div>
+                <strong>{{ bathrooms }}</strong>
+                <span>Bathrooms</span>
+            </div>
+
+            <div>
+                <strong>{{ r2_score }}%</strong>
+                <span>Model R²</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card prediction-chart-card">
+
+        <div>
+            <span class="badge">📊 VISUALIZATION</span>
+
+            <h2>Your Prediction vs Existing Houses</h2>
+
+            <p class="section-text">
+                The ⭐ marker represents the price predicted
+                for your property compared with the dataset.
+            </p>
+        </div>
+
+        <img
+            src="{{ url_for('static', filename='prediction_chart.png') }}"
+            alt="Prediction Chart"
+            class="prediction-chart"
+        >
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+<script>
+function resetPrediction() {
+    window.location.href = "{{ url_for('predict_page') }}";
+}
+</script>
+
+{% if prediction %}
+<script>
+window.addEventListener("load", function () {
+    setTimeout(function () {
+        document.getElementById("prediction-result")
+            .scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+    }, 200);
+});
+</script>
+{% endif %}
+
+{% endblock %}

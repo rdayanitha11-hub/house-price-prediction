@@ -1,4 +1,6 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
@@ -38,4 +40,20 @@ print("MSE:", mean_squared_error(y_test, y_pred))
 
 # Sample prediction
 sample = X_test.iloc[0].values.reshape(1, -1)
-print("\nSample Prediction:", model.predict(sample)[0])
+
+# =========================
+# DATA VISUALIZATION
+# =========================
+
+plt.figure(figsize=(8, 5))
+
+plt.scatter(df["area"], df["price"])
+
+plt.xlabel("Area (sq ft)")
+plt.ylabel("House Price")
+
+plt.title("Area vs House Price")
+
+plt.savefig("static/price_analysis.png")
+
+plt.show()

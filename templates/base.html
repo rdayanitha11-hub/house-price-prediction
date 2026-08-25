@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}HomePrice AI{% endblock %}</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <a href="{{ url_for('home') }}" class="logo">
+        🏠 <span>HomePrice</span><b> AI</b>
+    </a>
+
+    <div class="nav-links">
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('predict_page') }}">Predict</a>
+        <a href="{{ url_for('analysis_page') }}">Analysis</a>
+        <a href="{{ url_for('model_page') }}">Model</a>
+        <a href="{{ url_for('history_page') }}">History</a>
+        <a href="{{ url_for('about_page') }}">About</a>
+    </div>
+
+</nav>
+
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+
+<footer>
+    <p>🏠 HomePrice AI</p>
+    <span>Machine Learning • Flask • Python</span>
+</footer>
+
+</body>
+</html>
