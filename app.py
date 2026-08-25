@@ -100,14 +100,25 @@ def predict():
 
     history = session.get("history", [])
 
-    history.append({
-        "area": area,
-        "bedrooms": bedrooms,
-        "bathrooms": bathrooms,
-        "prediction": prediction
-    })
+    new_entry = {
+    "area": area,
+    "bedrooms": bedrooms,
+    "bathrooms": bathrooms,
+    "prediction": prediction
+    }
+
+    if not history or history[-1] != new_entry:
+        history.append(new_entry)
 
     session["history"] = history
+
+    session["last_prediction"] = {
+    "prediction": prediction,
+    "area": area,
+    "bedrooms": bedrooms,
+    "bathrooms": bathrooms,
+    "r2_score": round(r2 * 100, 2)
+}
 
     return render_template(
         "predict.html",
@@ -122,8 +133,22 @@ def predict():
 @app.route("/predict")
 def predict_page():
     history = session.get("history", [])
+    last_prediction = session.get("last_prediction")
+
+    if last_prediction:
+        return render_template(
+            "predict.html",
+            prediction=last_prediction["prediction"],
+            area=last_prediction["area"],
+            bedrooms=last_prediction["bedrooms"],
+            bathrooms=last_prediction["bathrooms"],
+            r2_score=last_prediction["r2_score"],
+            history=history
+        )
+
     return render_template(
         "predict.html",
+        prediction=None,
         r2_score=round(r2 * 100, 2),
         history=history
     )
@@ -149,16 +174,11 @@ def history_page():
 def about_page():
     return render_template("about.html")
 
-
 @app.route("/reset")
 def reset():
-    session.pop("prediction", None)
-    session.pop("area", None)
-    session.pop("bedrooms", None)
-    session.pop("bathrooms", None)
-    session.pop("r2_score", None)
-
+    session.pop("last_prediction", None)
     return redirect(url_for("predict_page"))
+
 
 if __name__ == "__main__":
     app.run(debug=True)
