@@ -87,7 +87,7 @@ User enters house details
 ## 🌐 Live Demo
 
 **House Price Prediction Web App:**
-Add your deployed Render URL here.
+https://house-price-prediction-4ysp.onrender.com
 
 ## 🎯 Purpose
 
